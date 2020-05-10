@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
+import { Navigation } from "@react-navigation/native";
 import { Context as AuthContext } from "../context/AuthContext";
 import AuthForm from "../components/AuthForm";
 import NavLink from "../components/NavLink";
@@ -10,7 +11,13 @@ const SignupScreen = ({ navigation }) => {
       return null;
     },
   });
-  const { state, signup } = useContext(AuthContext);
+  const { state, signup, clearErrorMessage } = useContext(AuthContext);
+
+  useEffect(() => {
+    navigation.addListener("blur", () => {
+      clearErrorMessage();
+    });
+  }, [navigation]);
 
   return (
     <View style={styles.container}>

@@ -7,7 +7,7 @@ const NavLink = ({ text, routeName }) => {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate("signin")}>
+    <TouchableOpacity onPress={() => navigation.navigate(routeName)}>
       <Spacer>
         <Text style={styles.link}>
           Already have an account? Sign in Instead
@@ -20,6 +20,7 @@ const NavLink = ({ text, routeName }) => {
 const styles = StyleSheet.create({
   link: {
     color: "blue",
+    fontSize: 18,
   },
 });
 

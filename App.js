@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -47,7 +47,11 @@ const MainFlow = () => {
 };
 
 const SwitchNavigation = () => {
-  const { state } = useContext(AuthContext);
+  const { state, tryLocalSignin } = useContext(AuthContext);
+
+  useEffect(() => {
+    tryLocalSignin();
+  }, []);
 
   return !state.token ? <LoginFlow /> : <MainFlow />;
 };

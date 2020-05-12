@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+// import AppLoading from "./src/screens/AppLoading";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import AccountScreen from "./src/screens/AccountScreen";
 import SigninScreen from "./src/screens/SigninScreen";
@@ -14,13 +16,16 @@ import {
   Provider as AuthProvider,
   Context as AuthContext,
 } from "./src/context/AuthContext";
+import { Provider as LocationProvider } from "./src/context/LocationContext";
+import { Provider as TrackProvider } from "./src/context/TrackContext";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const LoginFlow = () => {
   return (
-    <Stack.Navigator initialRouteName="Signup">
+    <Stack.Navigator>
+      {/* <Stack.Screen name="AppLoading" component={AppLoading} /> */}
       <Stack.Screen name="Signup" component={SignupScreen} />
       <Stack.Screen name="Signin" component={SigninScreen} />
     </Stack.Navigator>
@@ -58,11 +63,17 @@ const SwitchNavigation = () => {
 
 const App = () => {
   return (
-    <AuthProvider>
-      <NavigationContainer>
-        <SwitchNavigation />
-      </NavigationContainer>
-    </AuthProvider>
+    <TrackProvider>
+      <LocationProvider>
+        <AuthProvider>
+          <SafeAreaProvider>
+            <NavigationContainer>
+              <SwitchNavigation />
+            </NavigationContainer>
+          </SafeAreaProvider>
+        </AuthProvider>
+      </LocationProvider>
+    </TrackProvider>
   );
 };
 

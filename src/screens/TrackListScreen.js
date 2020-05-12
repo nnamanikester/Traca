@@ -1,16 +1,44 @@
-import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import React, { useContext } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
+import { Context as TrackContext } from "../context/TrackContext";
+import { ListItem } from "react-native-elements";
 
 const TracListScreen = ({ navigation }) => {
-  return (
-    <View>
-      <Text>TracList Screen</Text>
+  const { state, fetchTracks } = useContext(TrackContext);
+  useFocusEffect(() => {
+    fetchTracks();
+  }, []);
 
-      <Button
-        title="Go To Detail"
-        onPress={() => navigation.navigate("TrackDetail")}
+  if (!state)
+    return <ActivityIndicator size="large" style={{ marginTop: 200 }} />;
+
+  return (
+    <>
+      <Text>TracList Screen</Text>
+      <FlatList
+        data={state}
+        keyExtractor={(item) => item._id}
+        renderItem={({ item }) => {
+          return (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("TrackDetail", { _id: item._id })
+              }
+            >
+              <ListItem chevron title={item.name} />
+            </TouchableOpacity>
+          );
+        }}
       />
-    </View>
+    </>
   );
 };
 

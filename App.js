@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 // import AppLoading from "./src/screens/AppLoading";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { FontAwesome } from "@expo/vector-icons";
 
 import AccountScreen from "./src/screens/AccountScreen";
 import SigninScreen from "./src/screens/SigninScreen";
@@ -44,9 +45,36 @@ const TrackListFlow = () => {
 const MainFlow = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="trackListFlow" component={TrackListFlow} />
-      <Tab.Screen name="TrackCreate" component={TrackCreateScreen} />
-      <Tab.Screen name="Account" component={AccountScreen} />
+      <Tab.Screen
+        name="trackListFlow"
+        component={TrackListFlow}
+        options={{
+          tabBarLabel: "Tracks",
+          tabBarIcon: ({ size, color }) => (
+            <FontAwesome name="th-list" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="TrackCreate"
+        component={TrackCreateScreen}
+        options={{
+          tabBarLabel: "Add Track",
+          tabBarIcon: ({ size, color }) => (
+            <FontAwesome name="plus" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Account"
+        component={AccountScreen}
+        options={{
+          tabBarLabel: "Account",
+          tabBarIcon: ({ size, color }) => (
+            <FontAwesome name="gear" color={color} size={size} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };

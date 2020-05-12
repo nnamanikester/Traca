@@ -9,7 +9,7 @@ const AccountScreen = () => {
   const { signout } = useContext(AuthContex);
   return (
     <SafeAreaView>
-      <Text>Account Screen</Text>
+      <Text style={{ fontSize: 30 }}>Account Screen</Text>
       <Spacer>
         <Button title="Sign Out" onPress={signout} />
       </Spacer>

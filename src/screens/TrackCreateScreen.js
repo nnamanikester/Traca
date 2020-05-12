@@ -8,8 +8,9 @@ import { Context as LocationContext } from "../context/LocationContext";
 import useLocation from "../hooks/useLocation";
 import { useIsFocused } from "@react-navigation/native";
 import TrackForm from "../components/TrackForm";
+import { FontAwsome } from "@expo/vector-icons";
 
-const TrackCreateScreen = () => {
+const TrackCreateScreen = ({ navigation }) => {
   const {
     state: { recording },
     addLocation,

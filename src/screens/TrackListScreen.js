@@ -17,12 +17,15 @@ const TracListScreen = ({ navigation }) => {
     fetchTracks();
   }, []);
 
+  navigation.setOptions({
+    headerTitle: "Tracks",
+  });
+
   if (!state)
     return <ActivityIndicator size="large" style={{ marginTop: 200 }} />;
 
   return (
     <>
-      <Text>TracList Screen</Text>
       <FlatList
         data={state}
         keyExtractor={(item) => item._id}
